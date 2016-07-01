@@ -15,6 +15,7 @@ import org.dom4j.io.SAXReader;
 import com.song.entity.TextMessage;
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.StaxDriver;
 
 /**
  * 实现消息的格式转换(Map类型和XML的互转)
@@ -46,10 +47,13 @@ public class MessageUtil {
      * 将文本消息对象转换成XML
      */
     public static String textMessageToXML(TextMessage textMessage){
-        
-        XStream xstream = new XStream();              // 使用XStream将实体类的实例转换成xml格式    
-        xstream.alias("xml", textMessage.getClass()); // 将xml的默认根节点替换成“xml”
-        return xstream.toXML(textMessage);
+        try {
+        	XStream xstream = new XStream(new StaxDriver());              // 使用XStream将实体类的实例转换成xml格式    
+            xstream.alias("xml", textMessage.getClass()); // 将xml的默认根节点替换成“xml”
+            return xstream.toXML(textMessage);
+		} catch (Exception e) {
+			return "后台解析错误";
+		}
         
     }
     

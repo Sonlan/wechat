@@ -29,7 +29,27 @@ public class entry {
 		String nonce = request.getParameter("nonce");
 		String echostr = request.getParameter("echostr");
 		try {
-			String s = "{\"button\":[{\"name\":\"休闲娱乐\",\"sub_button\":[{\"type\":\"click\",\"name\":\"笑话大全\",\"key\":\"m_joke\"},{\"type\":\"click\",\"name\":\"内涵段子\",\"key\":\"m_duanzi\"},{\"type\":\"click\",\"name\":\"爆笑图片\",\"key\":\"m_laughImg\"}]},{\"name\":\"实用工具\",\"sub_button\":[{\"type\":\"click\",\"name\":\"天气查询\",\"key\":\"m_weather\"},{\"type\":\"click\",\"name\":\"公交查询\",\"key\":\"m_bus\"},{\"type\":\"click\",\"name\":\"功能菜单\",\"key\":\"m_sysmenu\"}]},{\"name\":\"消息示例\",\"sub_button\":[{\"type\":\"click\",\"name\":\"关于企特\",\"key\":\"m_about\"},{\"type\":\"click\",\"name\":\"图文消息\",\"key\":\"m_imgmsg\"},{\"type\":\"click\",\"name\":\"音乐消息\",\"key\":\"m_musicmsg\"}]}]}";
+			String s = "{"
+					+ "\"button\":["
+								+ "{\"name\":\"休闲娱乐\","
+								+ "\"sub_button\":["
+												+ "{\"type\":\"click\",\"name\":\"笑话大全\",\"key\":\"m_joke\"},"
+												+ "{\"type\":\"click\",\"name\":\"内涵段子\",\"key\":\"m_duanzi\"},"
+												+ "{\"type\":\"click\",\"name\":\"爆笑图片\",\"key\":\"m_laughImg\"}"
+												+ "]},"
+								+ "{\"name\":\"实用工具\","
+								+ "\"sub_button\":["
+												+ "{\"type\":\"click\",\"name\":\"天气查询\",\"key\":\"m_weather\"},"
+												+ "{\"type\":\"click\",\"name\":\"公交查询\",\"key\":\"m_bus\"},"
+												+ "{\"type\":\"view\",\"name\":\"测试微信登录\",\"url\":\"http://1u5186s163.51mypc.cn/wechat/test/index/\"}"
+												+ "]},"
+								+ "{\"name\":\"消息示例\","
+								+ "\"sub_button\":["
+												+ "{\"type\":\"click\",\"name\":\"关于企特\",\"key\":\"m_about\"},"
+												+ "{\"type\":\"click\",\"name\":\"图文消息\",\"key\":\"m_imgmsg\"},"
+												+ "{\"type\":\"click\",\"name\":\"音乐消息\",\"key\":\"m_musicmsg\"}"
+												+ "]}"
+					+ "]}";
 			String res = WxMenuUtils.createMenu(s, token);
 			System.out.println(res);
 		} catch (Exception e) {
@@ -59,9 +79,10 @@ public class entry {
 	                text.setCreateTime(new Date().getTime());
 	                text.setContent("你发送的消息是：" + content);
 	                message = MessageUtil.textMessageToXML(text);
-	                System.out.println(message);            
+	                System.out.println(message);    
+	                response.getWriter().write(message);                            // 将回应发送给微信服务器
 	            }
-	            response.getWriter().write(message);                            // 将回应发送给微信服务器
+	            
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }

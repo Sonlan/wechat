@@ -21,11 +21,18 @@ public class test {
 	private static final String APPSECRET = "d4624c36b6795d1d99dcf0547af5443d";
 	
 	@RequestMapping(value="/index")
-	public void  index(HttpServletResponse response) throws IOException{
-		String REDIRECT_URI = URLEncoder.encode("https://1u5186s163.51mypc.cn/wechat/test/toIndex", "utf-8");
-		String SCOPE = "snsapi_userinfo";  //snsapi_userinfo,snsapi_base
-		String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+APPID+"&redirect_uri="+REDIRECT_URI+"&response_type=code&scope="+SCOPE+"&state=123#wechat_redirect";
-		response.sendRedirect(url);
+	public void  index(HttpServletResponse response){
+		try {
+			String REDIRECT_URI = URLEncoder.encode("http://1u5186s163.51mypc.cn/wechat/test/toIndex", "utf-8");
+			//String REDIRECT_URI = URLEncoder.encode("http://www.baidu.com", "utf-8");
+			String SCOPE = "snsapi_userinfo";  //snsapi_userinfo,snsapi_base
+			String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+APPID+"&redirect_uri="+REDIRECT_URI+"&response_type=code&scope="+SCOPE+"&state=a13#wechat_redirect";
+			System.out.println(url);
+			response.sendRedirect(url);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	@RequestMapping(value="/toIndex")

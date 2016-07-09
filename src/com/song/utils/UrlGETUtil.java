@@ -27,6 +27,7 @@ public class UrlGETUtil {
 	        byte[] jsonBytes =new byte[size];
 	        is.read(jsonBytes);
 	        String message=new String(jsonBytes,"UTF-8");
+	        System.out.println(message);
 	        return JSONObject.fromObject(message);
 		} catch (Exception e) {
 			return null;

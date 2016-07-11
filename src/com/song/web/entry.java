@@ -19,7 +19,7 @@ import com.song.utils.WxMenuUtils;
 @Controller
 public class entry {
 	private static final String token = "songsong";
-	
+	private static final String URL_PREFIX = "http://1u5186s163.51mypc.cn";
 	
 	@RequestMapping(value="/index")
 	public void index(HttpServletRequest request,HttpServletResponse response) throws IOException{
@@ -31,24 +31,18 @@ public class entry {
 		try {
 			String s = "{"
 					+ "\"button\":["
-								+ "{\"name\":\"休闲娱乐\","
-								+ "\"sub_button\":["
-												+ "{\"type\":\"click\",\"name\":\"笑话大全\",\"key\":\"m_joke\"},"
-												+ "{\"type\":\"click\",\"name\":\"内涵段子\",\"key\":\"m_duanzi\"},"
-												+ "{\"type\":\"click\",\"name\":\"爆笑图片\",\"key\":\"m_laughImg\"}"
-												+ "]},"
-								+ "{\"name\":\"实用工具\","
-								+ "\"sub_button\":["
-												+ "{\"type\":\"click\",\"name\":\"天气查询\",\"key\":\"m_weather\"},"
-												+ "{\"type\":\"click\",\"name\":\"公交查询\",\"key\":\"m_bus\"},"
-												+ "{\"type\":\"view\",\"name\":\"测试微信登录\",\"url\":\"http://1u5186s163.51mypc.cn/wechat/test/index/\"}"
-												+ "]},"
-								+ "{\"name\":\"消息示例\","
-								+ "\"sub_button\":["
-												+ "{\"type\":\"click\",\"name\":\"关于企特\",\"key\":\"m_about\"},"
-												+ "{\"type\":\"click\",\"name\":\"图文消息\",\"key\":\"m_imgmsg\"},"
-												+ "{\"type\":\"click\",\"name\":\"音乐消息\",\"key\":\"m_musicmsg\"}"
-												+ "]}"
+								+ "{\"type\":\"view\",\"name\":\"个人信息\",\"url\":\""+URL_PREFIX+"/wechat/test/perinfo/\"},"
+								+ "{\"name\":\"最新活动\","
+											+ "\"sub_button\":["
+															+ "{\"type\":\"view\",\"name\":\"幸运大转盘\",\"url\":\""+URL_PREFIX+"/wechat/test/activity1/\"},"
+															+ "{\"type\":\"view\",\"name\":\"扫码抢红包\",\"url\":\""+URL_PREFIX+"/wechat/test/activity2/\"},"
+															+ "{\"type\":\"view\",\"name\":\"测试微信登录\",\"url\":\""+URL_PREFIX+"/wechat/test/index/\"}"
+								+ "]},"
+								+ "{\"name\":\"小工具\","
+											+ "\"sub_button\":["
+															+ "{\"type\":\"scancode_waitmsg\",\"name\":\"扫一扫\",\"key\": \"rselfmenu_0_0\"},"
+															+ "{\"type\":\"pic_sysphoto\",\"name\":\"拍照分享\",\"key\": \"rselfmenu_0_1\"}"
+								+ "]}"
 					+ "]}";
 			String res = WxMenuUtils.createMenu(s, token);
 			System.out.println(res);
